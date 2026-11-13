@@ -52,8 +52,7 @@ public class FrontController extends HttpServlet {
 			} else { //로그인한 상태
 				request.getRequestDispatcher("boardWrite.jsp").forward(request, response);
 			}
-		} else if(command.equals("/boardList.do")) {
-			request.getRequestDispatcher("boardList.jsp").forward(request, response);	
+		 	
 			
 		} else if(command.equals("/memberJoinAction.do")) {
 			//DB에 회원가입
@@ -122,12 +121,12 @@ public class FrontController extends HttpServlet {
 				response.sendRedirect("boardWrite.do");
 			}
 			
-		} else if (command.equals("boardList.do")) {
+		} else if (command.equals("/boardList.do")) {
 			BoardDao dao = new BoardDao();
 			ArrayList<BoardJoinDto> boardList = dao.boardList();
 			
 			request.setAttribute("boardList", boardList);
-			request.getRequestDispatcher("/boardList.do").forward(request, response);
+			request.getRequestDispatcher("boardList.jsp").forward(request, response);
 					
 		}
 	}

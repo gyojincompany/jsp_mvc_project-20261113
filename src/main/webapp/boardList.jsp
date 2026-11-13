@@ -11,7 +11,7 @@
 <body>
 	<h2>게시판 글 목록</h2>
 	<hr>
-	<table board="1" width="800">
+	<table border="1" width="800">
 		<thead>
 			<tr>
 				<th>번호</th>

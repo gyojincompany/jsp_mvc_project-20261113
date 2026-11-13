@@ -51,9 +51,9 @@ public class BoardDao {
 				+ "M.userid,"
 				+ "M.username,"
 				+ "M.email"
-				+ "FROM board B"
-				+ "INNER JOIN member M"
-				+ "ON B.userid = M.userid"
+				+ " FROM board B "
+				+ "INNER JOIN member M "
+				+ "ON B.userid = M.userid "
 				+ "ORDER BY B.boardnum DESC";
 		
 		ArrayList<BoardJoinDto> boardList = new ArrayList<BoardJoinDto>();
