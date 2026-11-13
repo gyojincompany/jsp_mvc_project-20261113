@@ -119,6 +119,8 @@ public class FrontController extends HttpServlet {
 				response.sendRedirect("boardWrite.do");
 			}
 			
+		} else if (command.equals("boardList.do")) {
+			
 		}
 	}
 
