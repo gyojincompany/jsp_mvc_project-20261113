@@ -23,17 +23,21 @@
 			</tr>		
 		</thead>
 		<tbody>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</tbody>
-	
+			<c:forEach var="Bdto" items="${boardList }">
+				<tr>
+					<td>${Bdto.boardnum }</td>
+					<td>
+						<a href="boardView.do?boardnum=${Bdto.boardnum }">${Bdto.title }</a>
+					</td>
+					<td>${Bdto.username }</td>
+					<td>${Bdto.email }</td>
+					<td>${Bdto.hit }</td>
+					<td>${Bdto.regdate }</td>
+				</tr>
+			</c:forEach>
+		</tbody>	
 	</table>
+	<button type="button" onclick="location.href='boardWrite.do'">글쓰기</button>
 	
 </body>
 </html>

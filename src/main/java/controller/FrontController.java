@@ -8,9 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import dao.BoardDao;
 import dao.MemberDao;
+import dto.BoardJoinDto;
 import dto.MemberDto;
 
 
@@ -50,7 +52,8 @@ public class FrontController extends HttpServlet {
 			} else { //로그인한 상태
 				request.getRequestDispatcher("boardWrite.jsp").forward(request, response);
 			}
-				
+		} else if(command.equals("/boardList.do")) {
+			request.getRequestDispatcher("boardList.jsp").forward(request, response);	
 			
 		} else if(command.equals("/memberJoinAction.do")) {
 			//DB에 회원가입
@@ -120,7 +123,12 @@ public class FrontController extends HttpServlet {
 			}
 			
 		} else if (command.equals("boardList.do")) {
+			BoardDao dao = new BoardDao();
+			ArrayList<BoardJoinDto> boardList = dao.boardList();
 			
+			request.setAttribute("boardList", boardList);
+			request.getRequestDispatcher("/boardList.do").forward(request, response);
+					
 		}
 	}
 
