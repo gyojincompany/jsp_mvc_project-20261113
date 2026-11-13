@@ -40,6 +40,17 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else if(command.equals("/loginSuccess.do")) {
 			request.getRequestDispatcher("loginSuccess.jsp").forward(request, response);
+		} else if(command.equals("/boardWrite.do")) {
+			//로그인한 유저만 글쓰기 가능			
+			String sid = (String) request.getSession().getAttribute("loginId");
+			//현재 세션 가져오기 후 로그인한 유저의 아이디 가져오기
+			if(sid == null) { //참->로그인하지 않은 상태
+				request.setAttribute("errorMsg", "로그인한 사용자만 글쓰기가 가능합니다.");
+				request.getRequestDispatcher("/login.do").forward(request, response);
+			} else { //로그인한 상태
+				request.getRequestDispatcher("boardWrite.jsp").forward(request, response);
+			}
+				
 			
 		} else if(command.equals("/memberJoinAction.do")) {
 			//DB에 회원가입
@@ -86,14 +97,14 @@ public class FrontController extends HttpServlet {
 			response.sendRedirect("login.do");
 			//로그아웃 후 로그인 페이지로 이동
 		} else if(command.equals("/boardWriteAction.do")) {
-			//로그인한 유저만 글쓰기 가능
+			
+			//로그인한 유저만 글쓰기 가능			
 			String sid = (String) request.getSession().getAttribute("loginId");
-			//현재 세션 가져오기
+			//현재 세션 가져오기 후 로그인한 유저의 아이디 가져오기
 			if(sid == null) {
 				request.setAttribute("errorMsg", "로그인한 사용자만 글쓰기가 가능합니다.");
 				request.getRequestDispatcher("/login.do").forward(request, response);
-			}
-			
+			} 
 			
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
@@ -102,6 +113,11 @@ public class FrontController extends HttpServlet {
 			int result = dao.writeBoard(sid, title, content);
 			//sid->로그인한 유저의 아이디
 			
+			if(result == 1) { //글쓰기 성공->글 목록으로 이동
+				response.sendRedirect("boardList.do");			
+			} else { //글쓰기 실패->글 쓰기 화면으로 이동
+				response.sendRedirect("boardWrite.do");
+			}
 			
 		}
 	}
