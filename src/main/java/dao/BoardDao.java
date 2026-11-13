@@ -92,7 +92,7 @@ public class BoardDao {
 	//글 번호로 글의 상세내용을 반환하는 메소드
 	public BoardDto boardView(String boardnum) {
 		
-		String sql="SELECT * FROM WHERE boardnum=?";
+		String sql="SELECT * FROM board WHERE boardnum=?";
 		
 		try {
 			

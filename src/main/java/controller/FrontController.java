@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import dao.BoardDao;
 import dao.MemberDao;
+import dto.BoardDto;
 import dto.BoardJoinDto;
 import dto.MemberDto;
 
@@ -133,7 +134,10 @@ public class FrontController extends HttpServlet {
 			//사용자가 클릭한 글의 번호(내용보기를 원하는 글의 번호)
 			
 			BoardDao dao = new BoardDao();
-			dao.boardView(boardnum);
+			BoardDto bDto = dao.boardView(boardnum);
+			
+			request.setAttribute("boardDto", bDto);
+			request.getRequestDispatcher("boardView.jsp").forward(request, response);
 		}
 	}
 
