@@ -15,6 +15,7 @@
 	<p>제목 : ${boardDto.title }</p>
 	<p>내용 : ${boardDto.content }</p>
 	<p>작성일 : ${boardDto.regdate }</p>
-	
+	<hr>
+	<button type="button" onclick="location.href='boardList.do'">글목록</button>
 </body>
 </html>
