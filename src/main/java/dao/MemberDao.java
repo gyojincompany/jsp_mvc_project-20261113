@@ -18,6 +18,7 @@ public class MemberDao {
 		String sql="INSERT INTO "
 				+ "member(userid, userpw, username, email)"
 				+ "VALUES (?,?,?,?)";
+		
 		int result = 0;
 		
 		try {

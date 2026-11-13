@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import dao.BoardDao;
 import dao.MemberDao;
 import dto.MemberDto;
 
@@ -78,6 +79,29 @@ public class FrontController extends HttpServlet {
 				request.getRequestDispatcher("/login.do").forward(request, response);
 				//로그인 실패 시 로그인 화면으로 다시 이동
 			}
+			
+		} else if(command.equals("/logout.do")) {
+			request.getSession().invalidate(); //로그아웃
+			//기존의 세션을 가져와서 세션 삭제
+			response.sendRedirect("login.do");
+			//로그아웃 후 로그인 페이지로 이동
+		} else if(command.equals("/boardWriteAction.do")) {
+			//로그인한 유저만 글쓰기 가능
+			String sid = (String) request.getSession().getAttribute("loginId");
+			//현재 세션 가져오기
+			if(sid == null) {
+				request.setAttribute("errorMsg", "로그인한 사용자만 글쓰기가 가능합니다.");
+				request.getRequestDispatcher("/login.do").forward(request, response);
+			}
+			
+			
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			
+			BoardDao dao = new BoardDao();
+			int result = dao.writeBoard(sid, title, content);
+			//sid->로그인한 유저의 아이디
+			
 			
 		}
 	}
