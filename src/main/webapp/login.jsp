@@ -14,6 +14,7 @@
 		비밀번호 : <input type="password" name="userpw" value="${userpw }"><br><br>
 		<button type="submit">로그인</button>
 	</form>
-	
+	<hr>
+	<h5 style="color:red;">${errorMsg }</h5>
 </body>
 </html>

@@ -53,6 +53,7 @@ public class FrontController extends HttpServlet {
 			if(result == 1) { //참->가입성공
 				request.setAttribute("userid", userid);
 				request.setAttribute("userpw", userpw);
+				request.setAttribute("errorMsg", "로그인 버튼을 누르면 회원가입한 아이디와 비밀번호로 로그인됩니다.");
 				request.getRequestDispatcher("/login.do").forward(request, response);
 			} else {
 				response.sendRedirect("memberJoin.do");
@@ -73,7 +74,8 @@ public class FrontController extends HttpServlet {
 				request.setAttribute("memberDto", mdto);
 				request.getRequestDispatcher("/loginSuccess.do").forward(request, response);
 			} else {
-				response.sendRedirect("login.do");
+				request.setAttribute("errorMsg", "아이디 또는 비밀번호가 잘못 되었습니다.");
+				request.getRequestDispatcher("/login.do").forward(request, response);
 				//로그인 실패 시 로그인 화면으로 다시 이동
 			}
 			
