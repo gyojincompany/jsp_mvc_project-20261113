@@ -134,6 +134,11 @@ public class FrontController extends HttpServlet {
 			//사용자가 클릭한 글의 번호(내용보기를 원하는 글의 번호)
 			
 			BoardDao dao = new BoardDao();
+			
+			//조회수 증가 메소드 호출
+			dao.updateHit(boardnum); 
+			
+			//글 내용 보기 메소드 호출
 			BoardDto bDto = dao.boardView(boardnum);
 			
 			request.setAttribute("boardDto", bDto);

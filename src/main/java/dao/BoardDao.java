@@ -125,7 +125,22 @@ public class BoardDao {
 		
 	}		
 	
-	
-	
-	
+	//글 조회수 증가 메소드
+	public void updateHit(String boardnum) {
+		String sql="UPDATE board SET hit=hit+1 WHERE boardnum=?";
+		
+		try {
+			
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, boardnum);
+			
+			pstmt.executeUpdate(); //조회수 증가(결과값 필요없음)
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
