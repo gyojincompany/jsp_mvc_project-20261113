@@ -128,6 +128,12 @@ public class FrontController extends HttpServlet {
 			request.setAttribute("boardList", boardList);
 			request.getRequestDispatcher("boardList.jsp").forward(request, response);
 					
+		} else if (command.equals("/boardView.do")) {
+			String boardnum = request.getParameter("boardnum");
+			//사용자가 클릭한 글의 번호(내용보기를 원하는 글의 번호)
+			
+			BoardDao dao = new BoardDao();
+			dao.boardView(boardnum);
 		}
 	}
 

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import dbutil.DBConnection;
+import dto.BoardDto;
 import dto.BoardJoinDto;
 import dto.MemberDto;
 
@@ -87,6 +88,43 @@ public class BoardDao {
 		return boardList;
 		
 	}
+	
+	//글 번호로 글의 상세내용을 반환하는 메소드
+	public BoardDto boardView(String boardnum) {
+		
+		String sql="SELECT * FROM WHERE boardnum=?";
+		
+		try {
+			
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, boardnum);			
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) { //참->상세 내용을 보려는 글이 존재한다는 이야기
+				int bnum = rs.getInt("boardnum"); //글번호
+				String title = rs.getString("title"); //글제목
+				String content = rs.getString("content"); //글내용
+				int hit = rs.getInt("hit"); //조회수
+				String userid = rs.getString("userid"); //작성자
+				Timestamp regdate = rs.getTimestamp("regdate"); //작성일
+				
+				BoardDto bDto = new BoardDto(bnum, title, content, userid, hit, regdate);
+				return bDto;
+			} else { //해당 글이 존재하지 않는다는 이야기
+				return null;
+			}	
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		return null;
+		
+	}		
+	
 	
 	
 	
