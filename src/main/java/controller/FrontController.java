@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import dao.MemberDao;
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -32,6 +34,14 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher("memberJoin.jsp").forward(request, response);
 		} else if(command.equals("/memberJoinAction.do")) {
 			//DB에 회원가입
+			String userid = request.getParameter("userid");
+			String userpw = request.getParameter("userpw");
+			String username = request.getParameter("username");
+			String email = request.getParameter("email");
+			
+			MemberDao dao = new MemberDao();
+			int result = dao.insertMember(userid, userpw, username, email); //회원가입 메소드 호출
+			//성공여부 확인->result값이 1이면 성공, 0이면 실패
 			
 		}
 	}
